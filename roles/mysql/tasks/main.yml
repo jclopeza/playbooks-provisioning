@@ -1,6 +1,6 @@
 ---
 - name: Install mysql server
-  apt: name={{item}}
+  apt: name={{item}} update_cache=yes
   with_items:
     - mysql-server
     - python-mysqldb
