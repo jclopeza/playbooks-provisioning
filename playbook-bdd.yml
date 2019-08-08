@@ -8,5 +8,4 @@
     service: name=ntp state=started enabled=yes
 
   roles:  
-    - { role: tomcat8 }
     - { role: mysql }
