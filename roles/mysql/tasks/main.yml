@@ -28,3 +28,7 @@
 
 - name: Create cng_user user for congruencias
   mysql_user: user="cng_user" host="%" password={{cng_password}} priv=congruencias.*:ALL,GRANT
+
+- name: Copy configuration file
+  copy: src=mysqld.cnf dest=/etc/mysql/mysql.conf.d owner=root mode=0640
+  notify: restart mysql
