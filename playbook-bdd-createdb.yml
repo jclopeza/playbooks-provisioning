@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Create a new database with name 'congruencias'
+    mysql_db:
+      name: congruencias
+      state: present
+  - name: Create cng_user user for congruencias
+    mysql_user: user="cng_user" host="%" password="cng_password" priv=congruencias.*:ALL,GRANT
