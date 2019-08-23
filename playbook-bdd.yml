@@ -1,11 +1,15 @@
 ---
 - hosts: all
   become: yes
-  tasks:
+  pre_tasks:
   - name: Ensure NTP (for time synchronization) is installed.
-    apt: name=ntp state=present
+    apt: name=ntp state=present update_cache=yes
   - name: Ensure NTP is running.
     service: name=ntp state=started enabled=yes
+  - name: Install python
+    apt:
+      name: ['mysql-server', 'python-mysqldb']
+      update_cache: yes
 
   roles:  
     - { role: mysql }
