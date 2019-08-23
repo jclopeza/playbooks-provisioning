@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install python and mysql-server
+    apt:
+      name: ['mysql-server', 'python-mysqldb']
+      update_cache: yes

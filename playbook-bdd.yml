@@ -6,10 +6,6 @@
     apt: name=ntp state=present
   - name: Ensure NTP is running.
     service: name=ntp state=started enabled=yes
-  - name: Install python
-    apt:
-      name: ['mysql-server', 'python-mysqldb']
-      update_cache: yes
 
   roles:  
     - { role: mysql }
