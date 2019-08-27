@@ -23,7 +23,9 @@
   authorized_key:
     user: tomcat
     state: present
-    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRwS/0sAAs6VrJ+Kd4iv2HJ96Cqrm1omibyrDipycJWz/HD5feVw8cUqYX6vX6ReHt8BYhERVnSc/Jsf54FEOKUY9Z+zw3zWXsLAfcAewdaueof9+HbhqIilhOeKRhJ27LPlsdHvCODlP9FIq4kC1F/OvEvSpfXt0Ssu+PEUeyKFT3UGrmRoJeS9+TR/BQnL+1+ywt+Ifvm5SzeKDpw6AuhKGQoOJh4g7C5OYRgm0I2HnSAHOtq2S8g4kwZ7kiWEWVt7/PFdcR6URnNqKhSPrASPJY040oIxrCZ0IjtpP0cr6n9Owm2M4Iu/PceQVkjRGx0B8SxJs8/2CtOAFFCTmF jcla@kubuntu"
+    key: "{{ item }}"
+  with_file:
+    - "{{ public_key_path }}"
 
 - name: Download Tomcat
   get_url: url=http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.8/bin/apache-tomcat-8.5.8.tar.gz dest=/opt/apache-tomcat-8.5.8.tar.gz
@@ -57,17 +59,3 @@
 - name: Configure Tomcat users
   template: src=tomcat-users.xml.j2 dest=/opt/apache-tomcat-8.5.8/conf/tomcat-users.xml
   notify: restart tomcat
-
-# - name: Configure Tomcat server
-#   template: src=server.xml dest=/usr/share/tomcat/conf/
-#   notify: restart tomcat
-
-# - name: Configure Tomcat users
-#   template: src=tomcat-users.xml dest=/usr/share/tomcat/conf/
-#   notify: restart tomcat
-
-
-
-
-# - name: wait for tomcat to start
-#   wait_for: port={{http_port}}
